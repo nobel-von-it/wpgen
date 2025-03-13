@@ -25,6 +25,13 @@ fn calc_full_rgb(start_c: &Rgb<u8>, end_c: &Rgb<u8>, t: f32) -> Rgb<u8> {
 }
 
 fn main() {
+    let args = std::env::args().skip(1).collect::<Vec<String>>();
+    if args.len() != 1 {
+        println!("Usage: wpgen <path>");
+        return;
+    }
+    let path = &args[0];
+
     let mut img = ImageBuffer::new(WIDTH, HEIGHT);
     let mut rng = rand::thread_rng();
 
@@ -45,6 +52,5 @@ fn main() {
         }
     }
 
-    img.save("/home/nerd/Wallp/grad.png").unwrap();
-    // img.save("./test.png").unwrap();
+    img.save(path).unwrap();
 }
